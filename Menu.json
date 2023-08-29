@@ -1,0 +1,51 @@
+[
+    {
+        "title": "치즈라볶이",
+        "img": "public/menu/치즈라볶이.jpg",
+        "price": "9,000원",
+        "detail": "치즈맛이 나지만 매콤함을 유지하여 아주 맛있게 먹을 수 있는 라볶이. 근데 내 생각에 라볶이는 신전떡볶이가 최고임.", 
+        "menuId": "menu1"
+    },
+    {
+        "title": "짜빠구리",
+        "img": "public/menu/짜빠구리.jpg",
+        "price": "9,000원",
+        "detail": "짜요",
+        "menuId": "menu2"
+    },
+    {
+        "title": "버터구이오징어입",
+        "img": "public/menu/버터구이오징어입.jpg",
+        "price": "8,000원",
+        "detail": "고소해요",
+        "menuId": "menu3"
+    },
+    {
+        "title": "갈릭빠다포테이토",
+        "img": "public/menu/갈릭빠다포테이토.jpg",
+        "price": "7,000원",
+        "detail": "달콤해요",
+        "menuId": "menu4"    
+    },
+    {
+        "title": "살얼음파인애플",
+        "img": "public/menu/살얼음파인애플.jpg",
+        "price": "7,000원",
+        "detail": "시원해요",
+        "menuId": "menu5"
+    },
+    {
+        "title": "30cm롱치즈돈까스",
+        "img": "public/menu/롱치즈돈까스.jpg",
+        "price": "10,000원",
+        "detail": "바삭해요", 
+        "menuId": "menu6"
+    },
+    {
+        "title": "kite하이볼",
+        "img": "public/menu/하이볼.jpg",
+        "price": "4,300원",
+        "detail": "써요",
+        "menuId": "menu7"
+    }
+]
