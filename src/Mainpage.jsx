@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 function Mainpage() {
 
     const [ list, setList ] = useState([]);
+    const [ orderList, setOrderList ] = useState([]);
     const location = useLocation();
 
     useEffect(() => {
@@ -43,7 +44,8 @@ function Mainpage() {
                                 <div className='menu-detail'>{menu.detail}</div>
                             </div>
                             <div className='menu-purchaseButton'>
-                                <ShoppingCartIcon />
+                                <ShoppingCartIcon/>
+                                <div className='menu-quantity'>{1}</div>
                             </div>
                         </div>
                     </Link>

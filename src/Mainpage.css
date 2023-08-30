@@ -69,5 +69,20 @@
 .menu-purchaseButton {
     margin-left: auto; /*이전 요소와의 사이를 최대한 넓히는 효과 */
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
+.menu-quantity {
+    margin-top: -10px;
+    margin-left: -10px;
+    background-color: #ff0000;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+}
