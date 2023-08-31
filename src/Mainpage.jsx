@@ -11,14 +11,16 @@ function Mainpage() {
     const [ list, setList ] = useState([]);
     const [ orderList, setOrderList ] = useState([]);
     const location = useLocation();
-
-    useEffect(() => {
-        if(location.state) {
-            const menu_key = Object.keys(location.state)[0]
-            const menu_quantity = location.state[menu_key]
-            console.log(menu_quantity)
-        }
-    })
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart)
+    
+    // useEffect(() => {
+    //     if(location.state) {
+    //         const menu_key = Object.keys(location.state)[0]
+    //         const menu_quantity = location.state[menu_key]
+    //         console.log(menu_quantity)
+    //     }
+    // })
     
   return (
     <div className='order-app'>
@@ -30,26 +32,31 @@ function Mainpage() {
         </div>
         <div className='menu-bar'>
             {
-                menus.map( (menu, index) => (
-                    <Link to={`/${menu.menuId}`} key={index} >
-                        <div className='menu-item'>
-                            <img 
-                                src={menu.img} 
-                                alt={menu.title} 
-                                className='menu-img'
-                            ></img>
-                            <div className='menu-details'>
-                                <div className='menu-title'>{menu.title}</div>
-                                <div className='menu-price'>{menu.price}</div>
-                                <div className='menu-detail'>{menu.detail}</div>
+                menus.map( (menu, index) => {
+                    const menuItemInCart = cart.find(item => item.menuId === menu.menuId);
+                    const quantityInCart = menuItemInCart ? menuItemInCart.qty : 0;
+                    console.log(quantityInCart)
+                    return (
+                        <Link to={`/${menu.menuId}`} key={index} >
+                            <div className='menu-item'>
+                                <img 
+                                    src={menu.img} 
+                                    alt={menu.title} 
+                                    className='menu-img'
+                                ></img>
+                                <div className='menu-details'>
+                                    <div className='menu-title'>{menu.title}</div>
+                                    <div className='menu-price'>{menu.price}</div>
+                                    <div className='menu-detail'>{menu.detail}</div>
+                                </div>
+                                <div className='menu-purchaseButton'>
+                                    <ShoppingCartIcon/>
+                                    {quantityInCart > 0 && <div className='menu-quantity'>{quantityInCart}</div>}
+                                </div>
                             </div>
-                            <div className='menu-purchaseButton'>
-                                <ShoppingCartIcon/>
-                                <div className='menu-quantity'>{1}</div>
-                            </div>
-                        </div>
-                    </Link>
-                ))
+                        </Link>
+                    )
+                })
             }
         </div>
         <div className='bottom-bar'>

@@ -19,7 +19,6 @@ function Menudetail() {
     cartModule.addCart( menuId, quantity )
     movePage("/"/*, { state: { [menu.title]: quantity } }*/);
   }
-  console.log(quantity)
 
 
   return (
