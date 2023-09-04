@@ -26,6 +26,10 @@
 .bottom-bar {
     height: 10%; /* 전체 높이의 10%를 차지하도록 설정 */
     background-color: #d0d0d0; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
 .menu-item {
@@ -85,4 +89,43 @@
     border-radius: 50%;
     color: white;
     font-weight: bold;
+}
+
+.purchase-total {
+    display: flex;
+    flex-direction: column;
+}
+
+.totalCount, .totalQuantity {
+    font-weight: bold;
+}
+
+.totalCount {
+    margin-top: 5px;
+    font-size: small;
+}
+
+.totalQuantity {
+    margin-top: 10px;
+    color: red;
+}
+
+.purchase-confirmedButton {
+    text-align: center;
+}
+
+.purchase-confirmedButton button {
+    padding: 10px 20px;
+    font-size: 16px;
+    /* font-weight: bold; */
+    border: none;   /* color and width are ignored */
+    background-color: #ffffff;
+    color: #e84155;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.purchase-confirmedButton button:hover {
+    background-color: #ddd;
 }

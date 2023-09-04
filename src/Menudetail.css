@@ -1,0 +1,98 @@
+/* 전체 페이지 스타일링 */
+.menu-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+}
+
+.menu-info {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 70%;
+    text-align: center;
+}
+
+.menu-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.menu-detail-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.menu-detail-price {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.menu-detail-text {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* 수량 조절 버튼 스타일링 */
+.quantity-controller { 
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* increment와 decrement 사이에 공간 주기 */
+}
+
+.quantity-increment {
+    padding: 5px 10px;
+    font-size: 13px;
+    background-color: #e84155;
+    color: #fff;
+    border: none;   /* 테두리선 없애기!!! */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* transition으로 효과주기 */
+}
+
+.quantity-decrement {
+    padding: 5px 10px;
+    font-size: 20px;
+    background-color: #e84155;
+    color: #fff;
+    border: none;   /* 테두리선 없애기!!! */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* transition으로 효과주기 */
+}
+
+.quantity-increment:hover,
+.quantity-decrement:hover {
+    /* transition을 줄 효과 */
+    background-color: #d63031;
+}
+
+/* 주문하기 버튼 스타일링 */
+.order-button-wrapper {
+    margin-top: 20px;
+}
+
+.order-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #27ae60;
+}

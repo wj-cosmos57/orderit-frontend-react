@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import './Menudetail.css';
 import menus from '../Menu.json'
 
 import * as cartModule from './cartModule';
@@ -22,19 +23,19 @@ function Menudetail() {
 
 
   return (
-    <div>
-        <div>
-            <img src={menu.img} alt={menu.title} />
-            <h1>{menu.title}</h1>
-            <p>{menu.price}</p>
-            <p>{menu.detail}</p>
+    <div className='menu-detail-wrapper'>
+        <div className='menu-info'>
+            <img src={menu.img} alt={menu.title} className='menu-image'/>
+            <h1 className='menu-detail-title'>{menu.title}</h1>
+            <p className='menu-detail-price'>{menu.price}원</p>
+            <p className='menu-detail-text'>{menu.detail}</p>
         </div>
-        <div>
-            <button onClick={() => setQuantity(prev => prev + 1)}>+</button>
-            <button onClick={() => setQuantity(prev => prev - 1)}>-</button>
+        <div className='quantity-controller'>
+            <button className='quantity-increment' onClick={() => setQuantity(prev => prev + 1)}>+</button>
+            <button className='quantity-decrement' onClick={() => setQuantity(prev => prev - 1)}>-</button>
         </div>
-        <div>
-            <button onClick={goMainpage}>주문하기</button>
+        <div className='order-button-wrapper'>
+            <button className='order-button' onClick={goMainpage}>주문하기</button>
         </div>
     </div>
     
