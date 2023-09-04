@@ -8,6 +8,12 @@
 .top-bar {
     height: 15%; /* 전체 높이의 20%를 차지하도록 설정 */
     background-color: #f2f2f2; 
+    display: flex;
+}
+
+.reset-button {
+    display: flex;
+    flex-direction: row;
 }
 
 .menu-bar {

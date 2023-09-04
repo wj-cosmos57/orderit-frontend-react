@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Mainpage.css';
 
 import{ Link, useLocation } from "react-router-dom";
@@ -8,22 +8,15 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Mainpage() {
 
-    const [ list, setList ] = useState([]);
-    const [ orderList, setOrderList ] = useState([]);
-    const location = useLocation();
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    // const [ list, setList ] = useState([]);
+    // const [ orderList, setOrderList ] = useState([]);
+    // const location = useLocation();
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     console.log(cart)
     let totalQuantityRef = useRef([0, 0]);
     // let totalQuantity = 0; totalQuantity 이런식으로 관리하면 렌더링 될때마다 초기화 됨. 따라서 useRef로 관리해야함.
-    
-    // useEffect(() => {
-    //     if(location.state) {
-    //         const menu_key = Object.keys(location.state)[0]
-    //         const menu_quantity = location.state[menu_key]
-    //         console.log(menu_quantity)
-    //     }
-    // })
-    
+
+    //useEffect사용해서 초기화 계속 렌더링 되게하기
   return (
     <div className='order-app'>
         <div className='top-bar'>
@@ -31,13 +24,15 @@ function Mainpage() {
                 <img src='/public/Vis_logo.png'></img>
                 <p>2023 IT대학 대동제 주점</p>
             </div>
+            <div className='reset'>
+                <button className='reset-button' onClick={() => {localStorage.clear();}}>초기화</button>
+            </div>
         </div>
         <div className='menu-bar'>
             {
                 menus.map( (menu, index) => {
                     const menuItemInCart = cart.find(item => item.menuId === menu.menuId);
                     const quantityInCart = menuItemInCart ? menuItemInCart.qty : 0;
-                    // console.log(quantityInCart)
                     
                     const menuPrice = parseInt(menu.price.replace(/,/g, ''), 10);
                     console.log(menuPrice)

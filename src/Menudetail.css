@@ -77,6 +77,12 @@
     background-color: #d63031;
 }
 
+.quantity-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* 주문하기 버튼 스타일링 */
 .order-button-wrapper {
     margin-top: 20px;
