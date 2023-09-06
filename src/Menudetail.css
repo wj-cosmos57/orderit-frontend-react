@@ -9,6 +9,20 @@
     background-color: #f7f7f7;
 }
 
+.navigation-link a {
+    color: black;      
+    transition: color 0.3s ease; /* 옵션: 호버 시의 부드러운 색상 전환 효과 */
+}
+
+.navigation-link a:hover {
+    color: #333; /* 원하는 호버 시의 색상으로 변경 */
+}
+
+.navigation-link {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
 .menu-info {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -34,6 +48,8 @@
 .menu-detail-price {
     color: red;
     margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .menu-detail-text {
@@ -89,7 +105,7 @@
 }
 
 .order-button {
-    padding: 10px 20px;
+    padding: 12px 60px;
     font-size: 18px;
     background-color: #2ecc71;
     color: #fff;

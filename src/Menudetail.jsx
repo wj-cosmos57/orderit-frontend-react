@@ -25,7 +25,7 @@ function Menudetail() {
   return (
     <div className='menu-detail-wrapper'>
       <div className='navigation-link'>
-        <Link to="/">돌아가기</Link>
+        <Link to="/">메인화면으로 돌아가기</Link>
       </div>
       <div className='menu-info'>
         <img src={menu.img} alt={menu.title} className='menu-image' />

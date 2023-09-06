@@ -6,20 +6,25 @@
 }
 
 .top-bar {
-    height: 15%; /* 전체 높이의 20%를 차지하도록 설정 */
+    height: 10%; /* 전체 높이의 20%를 차지하도록 설정 */
     background-color: #f2f2f2; 
     display: flex;
 }
 
-.reset-button {
+.logo-title {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
 .menu-bar {
-    height: 75%; /* 전체 높이의 70%를 차지하도록 설정 */
+    height: 90%; /* 전체 높이의 70%를 차지하도록 설정 */
     background-color: #ffffff; 
-    overflow-y: auto; /* 메뉴가 많아져서 화면을 넘을 경우 스크롤바가 생기도록 설정 */
+    /* overflow-y: auto; 메뉴가 많아져서 화면을 넘을 경우 스크롤바가 생기도록 설정 */
+    position: relative;
+    display: block;
+    background-color: #fff;
 }
 
 /* Link 컴포넌트는 기본적으로 `<a>` 태그로 렌더링되어 웹브라우저의 기본 스타일을
@@ -42,15 +47,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 3em;
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
-    margin: 10px 0;
+    margin: 10px 18px;
     /* 요소 상하에 10픽셀의 공간을 만들고, 좌우에는 추가적인 공간X */
 }
 
 .menu-img{
-    width: 120px;
-    height: 100px;
+    width: 80px;
+    height: 60px;
     margin-right: 20px;
     border-radius: 4px; /* 이미지를 약간 둥글게 */
     object-fit: cover; 
@@ -62,36 +68,51 @@
 
 .menu-title {
     font-weight: bolder;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .menu-price {
     font-size: 15px;
+    font-weight: 700;
     color: #ff0000;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .menu-detail {
     font-size: 12px;
-    color: #888;
+    color: #8f8f8f;
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%; 
+    max-height: 15px;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 }
 
 .menu-purchaseButton {
+    padding: 5px 5px;
     margin-left: auto; /*이전 요소와의 사이를 최대한 넓히는 효과 */
     cursor: pointer;
     display: flex;
     justify-content: center;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.04);
+    box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: #e5e5e5;
+    background-color: #fff;
 }
 
 .menu-quantity {
-    margin-top: -10px;
-    margin-left: -10px;
+    margin-top: -5px;
+    margin-left: -14px;
     background-color: #ff0000;
     width: 15px;
     height: 15px;
     text-align: center;
-    vertical-align: middle;
-    font-size: 10px;
+    font-size: 13px;
     border-radius: 50%;
     color: white;
     font-weight: bold;
