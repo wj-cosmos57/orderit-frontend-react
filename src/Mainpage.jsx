@@ -18,7 +18,8 @@ function Mainpage() {
     <div className='order-app'>
         <div className='top-bar'>
             <div className='logo-container'>
-                <div className='logo-title'>2023 IT대학 대동제 주점</div>
+                <img src="../public/logo.png"></img>
+                {/* <div className='logo-title'>2023 IT대학 대동제 주점</div> */}
             </div>
         </div>
 
@@ -38,11 +39,13 @@ function Mainpage() {
                     return (
                         <Link to={`/${menu.menuId}`} key={index} >
                             <div className='menu-item'>
-                                <img 
-                                    src={menu.img} 
-                                    alt={menu.title} 
-                                    className='menu-img'
-                                ></img>
+                                <div className='img-div'>
+                                    <img 
+                                        src={menu.img} 
+                                        alt={menu.title} 
+                                        className='menu-img'
+                                    ></img>
+                                </div>
                                 <div className='menu-details'>
                                     <div className='menu-title'>{menu.title}</div>
                                     <div className='menu-price'>{menu.price}원</div>

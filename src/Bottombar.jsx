@@ -2,6 +2,7 @@ import React from 'react'
 
 import './Bottombar.css'
 import menus from '../Menu.json'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Bottombar(props) {
@@ -26,7 +27,7 @@ function Bottombar(props) {
                         <div className='info_price'>{totalMoney.toLocaleString()}</div>
                     </div>
                     <div className='btn_reset'>
-                        <button className='reset_button' onClick={handleReset}>메뉴초기화</button>
+                        <button className='reset_button' onClick={handleReset}><DeleteForeverIcon /></button>
                     </div>
                     <a className='btn_order'>
                         주문하기

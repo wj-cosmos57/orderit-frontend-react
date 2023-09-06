@@ -54,10 +54,15 @@
     /* 요소 상하에 10픽셀의 공간을 만들고, 좌우에는 추가적인 공간X */
 }
 
+.img-div {
+    width: 80px;
+    margin-right: 20px;
+}
+
 .menu-img{
     width: 80px;
     height: 60px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     border-radius: 4px; /* 이미지를 약간 둥글게 */
     object-fit: cover; 
     /* 
