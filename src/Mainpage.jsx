@@ -35,8 +35,8 @@ function Mainpage() {
           totalQuantityRef.current[0] += quantityInCart;
           totalQuantityRef.current[1] += menuPrice * quantityInCart;
 
-          console.log(totalQuantityRef.current[0]);
-          console.log(totalQuantityRef.current[1]);
+          // console.log(totalQuantityRef.current[0]);
+          // console.log(totalQuantityRef.current[1]);
 
           return (
             <Link to={`/${menu.menuId}`} key={index}>
