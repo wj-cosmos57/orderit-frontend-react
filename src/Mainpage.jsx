@@ -13,7 +13,9 @@ function Mainpage() {
     cart.length > 0 ? menus.find((m) => m.menuId === cart[0].menuId) : null; // 담긴 첫번째 메뉴
   const remainingItems = cart.length; // 담긴 메뉴의 종류 수
 
-  let totalQuantityRef = useRef([0, 0]); // [0]: 총메뉴개수 [1]: 총합계
+  let totalQuantityRef = [0, 0]; // [0]: 총메뉴개수 [1]: 총합계
+  //여기서 useRef를 사용하려고 했지만 굳이 그럴 필요 없음. 나는 map을 통해서 렌더링 시마다 합을 더하여 계산해내고 있기 때문에
+  //그냥 일반 변수에 담아서 관리하면 됨. 만약 useRef를 사용하여 관리할 경우에는 렌더링 때마다 합계가 누적됨.
 
   return (
     <div className="order-app">
@@ -32,8 +34,8 @@ function Mainpage() {
           const quantityInCart = menuItemInCart ? menuItemInCart.qty : 0;
           const menuPrice = parseInt(menu.price.replace(/,/g, ""), 10);
 
-          totalQuantityRef.current[0] += quantityInCart;
-          totalQuantityRef.current[1] += menuPrice * quantityInCart;
+          totalQuantityRef[0] += quantityInCart;
+          totalQuantityRef[1] += menuPrice * quantityInCart;
 
           // console.log(totalQuantityRef.current[0]);
           // console.log(totalQuantityRef.current[1]);
@@ -66,10 +68,10 @@ function Mainpage() {
           );
         })}
       </div>
-      {totalQuantityRef.current[0] > 0 && (
+      {totalQuantityRef[0] > 0 && (
         <Bottombar
-          totalCount={totalQuantityRef.current[0]}
-          totalMoney={totalQuantityRef.current[1]}
+          totalCount={totalQuantityRef[0]}
+          totalMoney={totalQuantityRef[1]}
           firstMenuItem={firstMenuItem}
           remainingItems={remainingItems}
         />

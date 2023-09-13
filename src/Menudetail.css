@@ -24,12 +24,16 @@
 }
 
 .back_to_menu_icon {
+  position: relative;
+  top: 5px;
   margin-right: 10px;
 }
 
 .back_to_menu {
   padding: 5px 60px;
   font-size: 20px;
+  line-height: 24px;
+
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -37,7 +41,6 @@
   cursor: pointer;
   font-family: -apple-system, BlinkMacSystemFont, helvetica, Apple SD Gothic Neo,
     sans-serif;
-  line-height: 24px;
 }
 
 .menu-info {

@@ -15,7 +15,7 @@ function Order() {
   const [cart, setCart] = useState(initialCart);
 
   const [showDeveloperInfo, setShowDeveloperInfo] = useState(false);
-  let totalRef = 0; //useRef(0); 총합계
+  let totalRef = 0; //useRef(0)로 총합계 를 쓰려고 함. 하지만 useState로 렌더링을 하기 때문에 useRef로 관리할 필요 없음
 
   const decreaseQuantity = (menuId) => {
     let editQuantity = 1;
@@ -28,20 +28,23 @@ function Order() {
     }
 
     const newCart = JSON.parse(localStorage.getItem("cart")) || [];
-
     setCart(newCart);
   };
 
   const increaseQuantity = (menuId) => {
     let editQuantity = 1;
     cartModule.addCart(menuId, editQuantity, "plus");
-    window.location.reload();
+
+    const newCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(newCart);
   };
 
   const removeFromCart = (menuId) => {
     const updatedCart = cart.filter((item) => item.menuId !== menuId);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    window.location.reload();
+
+    const newCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(newCart);
   };
 
   const deleteQuantity = () => {};
