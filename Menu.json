@@ -1,51 +1,51 @@
 [
-    {
-        "title": "짜파구리",
-        "img": "public/menu/치즈라볶이.jpg",
-        "price": "9,000",
-        "detail": "짭짤한 짜파게티와 매콤한 너구리의 완벽한 조화, 한 그릇에 담겨진 고요한 맛의 축제!", 
-        "menuId": "menu1"
-    },
-    {
-        "title": "나쵸",
-        "img": "public/menu/짜빠구리.jpg",
-        "price": "9,000",
-        "detail": "바삭한 튀김과 치즈의 환상적인 만남, 입맛을 사로잡는 달콤하고 짭조름한 감각!",
-        "menuId": "menu2"
-    },
-    {
-        "title": "오뎅탕",
-        "img": "public/menu/오뎅탕.png",
-        "price": "8,000",
-        "detail": "탕에 멋지게 떠다니는 오뎅들과 우동사리들이 모여 힘을 모으면 오뎅스 어벤저스!",
-        "menuId": "menu3"
-    },
-    {
-        "title": "김치볶음밥",
-        "img": "public/menu/김치볶음밥.jpeg",
-        "price": "7,000",
-        "detail": "김치와 밥이 만나서 열악한 환경에서 함께 볶인다. 김치와 밥, 어깨동무로 열악한 상황에서 힘을 합쳐 우정을 증명한다!",
-        "menuId": "menu4"    
-    },
-    {
-        "title": "치킨너겟",
-        "img": "public/menu/치킨너겟.png",
-        "price": "7,000",
-        "detail": "형이 공룡 한 마리 잡아왔다. 먹고가라. 둘이서 먹다 옆에놈 기절해도 난 모른다.",
-        "menuId": "menu5"
-    },
-    {
-        "title": "부대찌개",
-        "img": "public/menu/부대찌개.jpeg",
-        "price": "10,000",
-        "detail": "한 마디만 할게. 형이야. 두 번말 안한다. 먹어.", 
-        "menuId": "menu6"
-    },
-    {
-        "title": "kite하이볼",
-        "img": "public/menu/하이볼.jpg",
-        "price": "4,300",
-        "detail": "써요",
-        "menuId": "menu7"
-    }
+  {
+    "title": "짜파구리",
+    "img": "public/menu/짜파구리.png",
+    "price": "9,000",
+    "detail": "짭짤한 짜파게티와 매콤한 너구리의 완벽한 조화, 한 그릇에 담겨진 고요한 맛의 축제!",
+    "menuId": "menu1"
+  },
+  {
+    "title": "나쵸",
+    "img": "public/menu/나쵸.jpeg",
+    "price": "9,000",
+    "detail": "바삭한 튀김과 치즈의 환상적인 만남, 입맛을 사로잡는 달콤하고 짭조름한 감각!",
+    "menuId": "menu2"
+  },
+  {
+    "title": "오뎅탕",
+    "img": "public/menu/오뎅탕2.jpeg",
+    "price": "8,000",
+    "detail": "탕에 멋지게 떠다니는 오뎅들과 우동사리들이 모여 힘을 모으면 오뎅스 어벤저스!",
+    "menuId": "menu3"
+  },
+  {
+    "title": "김치볶음밥",
+    "img": "public/menu/김치볶음밥.jpeg",
+    "price": "7,000",
+    "detail": "김치와 밥이 만나서 열악한 환경에서 함께 볶인다. 김치와 밥, 어깨동무로 열악한 상황에서 힘을 합쳐 우정을 증명한다!",
+    "menuId": "menu4"
+  },
+  {
+    "title": "치킨너겟",
+    "img": "public/menu/치킨너겟2.png",
+    "price": "7,000",
+    "detail": "형이 공룡 한 마리 잡아왔다. 먹고가라. 둘이서 먹다 옆에놈 기절해도 난 모른다.",
+    "menuId": "menu5"
+  },
+  {
+    "title": "부대찌개",
+    "img": "public/menu/부대찌개.jpeg",
+    "price": "10,000",
+    "detail": "한 마디만 할게. 형이야. 두 번말 안한다. 먹어.",
+    "menuId": "menu6"
+  },
+  {
+    "title": "kite하이볼",
+    "img": "public/menu/하이볼.jpg",
+    "price": "4,300",
+    "detail": "써요",
+    "menuId": "menu7"
+  }
 ]

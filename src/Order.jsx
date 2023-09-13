@@ -15,17 +15,32 @@ function Order() {
   const [cart, setCart] = useState(initialCart);
 
   const [showDeveloperInfo, setShowDeveloperInfo] = useState(false);
-  let totalRef = useRef(0); // 총합계
+  let totalRef = 0; //useRef(0); 총합계
 
   const decreaseQuantity = (menuId) => {
     let editQuantity = 1;
-    cartModule.addCart(menuId, editQuantity, "minus");
-    window.location.reload();
+    console.log(menuId);
+    if (menuId) {
+      cartModule.addCart(menuId, editQuantity, "minus");
+    } else {
+      alert("최소주문 개수 입니다");
+      return;
+    }
+
+    const newCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    setCart(newCart);
   };
 
   const increaseQuantity = (menuId) => {
     let editQuantity = 1;
     cartModule.addCart(menuId, editQuantity, "plus");
+    window.location.reload();
+  };
+
+  const removeFromCart = (menuId) => {
+    const updatedCart = cart.filter((item) => item.menuId !== menuId);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
     window.location.reload();
   };
 
@@ -41,12 +56,12 @@ function Order() {
         <div className="section_order_header">
           <div className="order_header_inner">
             <div className="header_title">주문서</div>
-            <a className="button_close" role="button">
+            <Link to="/" className="button_close" role="button">
               <CloseIcon
                 style={{ width: 30, height: 30 }}
                 className="close_page"
               />
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -68,9 +83,9 @@ function Order() {
                     const menuImage = menuIteminCart.img;
                     const menuQuantity = cartMenu.qty;
                     console.log(menuQuantity);
-                    totalRef.current +=
+                    totalRef +=
                       parseInt(menuPrice.replace(/,/g, ""), 10) * menuQuantity;
-                    console.log(totalRef.current);
+                    // console.log(totalRef.current);
                     return (
                       <li key={cartMenu.menuId}>
                         <div className="menu">
@@ -83,17 +98,24 @@ function Order() {
                           </div>
                           <div className="info_wrap">
                             <strong className="menu_title">{menuTitle}</strong>
-                            <CloseIcon className="close_menu" />
-                            {/* <a className="delete_button" role="button">
-                              X
-                            </a> */}
+                            <CloseIcon
+                              className="close_menu"
+                              onClick={() =>
+                                removeFromCart(menuIteminCart.menuId)
+                              }
+                            />
+
                             <div className="figure_area">
                               <div className="section_counter">
                                 <a
                                   className="minus_button"
                                   role="button"
                                   onClick={() =>
-                                    decreaseQuantity(menuIteminCart.menuId)
+                                    decreaseQuantity(
+                                      menuQuantity > 1
+                                        ? menuIteminCart.menuId
+                                        : null
+                                    )
                                   }
                                 >
                                   -
@@ -137,9 +159,7 @@ function Order() {
             <div className="order_price_area">
               <div className="order_price_row">
                 <div className="order_title2">주문 금액</div>
-                <div className="order_price">
-                  {totalRef.current.toLocaleString()}원
-                </div>
+                <div className="order_price">{totalRef.toLocaleString()}원</div>
               </div>
             </div>
             <div className="total_price_area">
@@ -147,7 +167,7 @@ function Order() {
                 <div className="total_title">총 결제 금액</div>
                 <div className="total_price">
                   <span className="total_text">
-                    {totalRef.current.toLocaleString()}원
+                    {totalRef.toLocaleString()}원
                   </span>
                 </div>
               </div>

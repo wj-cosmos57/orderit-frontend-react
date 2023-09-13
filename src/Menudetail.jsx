@@ -5,6 +5,7 @@ import "./Menudetail.css";
 import menus from "../Menu.json";
 
 import * as cartModule from "./cartModule";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Menudetail() {
   const { menuId } = useParams();
@@ -24,7 +25,12 @@ function Menudetail() {
   return (
     <div className="menu-detail-wrapper">
       <div className="navigation-link">
-        <Link to="/">메인화면으로 돌아가기</Link>
+        <Link to="/">
+          <button className="back_to_menu">
+            <ArrowBackIcon className="back_to_menu_icon" />
+            메인화면으로 돌아가기
+          </button>
+        </Link>
       </div>
       <div className="menu-info">
         <img src={menu.img} alt={menu.title} className="menu-image" />
@@ -34,13 +40,6 @@ function Menudetail() {
       </div>
       <div className="quantity-controller">
         <button
-          className="quantity-increment"
-          onClick={() => setQuantity((prev) => prev + 1)}
-        >
-          +
-        </button>
-        {quantity >= 0 && <div className="quantity-info">{quantity}</div>}
-        <button
           className="quantity-decrement"
           onClick={() => {
             if (quantity > 0) setQuantity((prev) => prev - 1);
@@ -48,6 +47,13 @@ function Menudetail() {
           }}
         >
           -
+        </button>
+        {quantity >= 0 && <div className="quantity-info">{quantity}</div>}
+        <button
+          className="quantity-increment"
+          onClick={() => setQuantity((prev) => prev + 1)}
+        >
+          +
         </button>
       </div>
       <div className="order-button-wrapper">
