@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Bottombar.css";
-import menus from "../Menu.json";
+import menus from "../../../Menu.json";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -11,7 +11,7 @@ function Bottombar(props) {
   const movePage = useNavigate();
 
   const handleReset = () => {
-    localStorage.clear();
+    window.localStorage.removeItem("cart");
     window.location.reload();
   };
 

@@ -1,19 +1,20 @@
-import axios from 'axios';
-const API_BASE_URL = "http://ec2-52-79-114-252.ap-northeast-2.compute.amazonaws.com/"
+import axios from "axios";
+
+const API_BASE_URL =
+  "http://ec2-52-79-114-252.ap-northeast-2.compute.amazonaws.com/";
 const makeHeaders = async (authRequired) => {
-  if(authRequired){
-    let accessToken = await localStorage.getItem('accessToken');
+  if (authRequired) {
+    let accessToken = await localStorage.getItem("accessToken");
 
     if (!accessToken) {
-      accessToken = '';
+      accessToken = "";
     }
 
     return {
-      Authorization: 'Bearer ' + accessToken
+      Authorization: "Bearer " + accessToken,
     };
   } else {
-    return {
-    };
+    return {};
   }
 };
 
@@ -31,9 +32,9 @@ const post = async (uri, body, authRequired) => {
     if (e.response?.status) {
       if (e.response?.status == 521) {
         return {
-          statusCode: 'SSU0000',
+          statusCode: "SSU0000",
           data: null,
-          message: 'Failed to connect to server',
+          message: "Failed to connect to server",
         };
       }
     }
@@ -43,11 +44,11 @@ const post = async (uri, body, authRequired) => {
     }
 
     return {
-      statusCode: 'SSU0000',
+      statusCode: "SSU0000",
       data: null,
-      message: 'Failed to connect to server',
+      message: "Failed to connect to server",
     };
   }
 };
 
-export {post};
+export { post };

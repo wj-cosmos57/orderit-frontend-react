@@ -1,13 +1,13 @@
-import {post} from './common';
+import { post } from "./common";
 
 const login = async (tableNo) => {
   return await post(
-    'table/login',
+    "table/login",
     {
-      tableNo: tableNo
+      tableNo: tableNo,
     },
-    false,
+    false
   );
 };
 
-export {login};
+export { login };

@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { menu } from "../../apis/menu";
+import { orderInfo } from "../../apis/orderInfo";
 
 import "./Order.css";
-import menus from "../Menu.json";
-import * as cartModule from "./cartModule";
+import menus from "../../../Menu.json";
+import * as cartModule from "../../cartModule";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
@@ -14,9 +16,22 @@ function Order() {
   const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
   const [cart, setCart] = useState(initialCart);
 
+  const [menuList, setMenuList] = useState(null);
+  const [orderer, setOrderer] = useState("");
+
+  //메뉴 api 연동
+  useEffect(() => {
+    async function fetchData() {
+      let menuRes = await menu();
+      setMenuList(menuRes.data.menus);
+    }
+    fetchData();
+  }, []);
+
   const [showDeveloperInfo, setShowDeveloperInfo] = useState(false);
   let totalRef = 0; //useRef(0)로 총합계 를 쓰려고 함. 하지만 useState로 렌더링을 하기 때문에 useRef로 관리할 필요 없음
 
+  //메뉴 추가, 감소, 삭제
   const decreaseQuantity = (menuId) => {
     let editQuantity = 1;
     console.log(menuId);
@@ -47,12 +62,34 @@ function Order() {
     setCart(newCart);
   };
 
-  const deleteQuantity = () => {};
-
+  // 개발자 정보
   const toggleDeveloperInfo = () => {
     setShowDeveloperInfo(!showDeveloperInfo);
   };
 
+  //주문 api 연동
+  const handleInputChange = (e) => {
+    setOrderer(e.target.value);
+  };
+
+  const handleOrder = async () => {
+    const name = orderer;
+
+    if (!name) {
+      alert("이름을 입력해주세요!");
+      return;
+    }
+    const menus = cart.map((item) => ({
+      menuId: item.menuId,
+      qty: item.qty,
+    }));
+
+    let orderRes = orderInfo(menus, name);
+
+    console.log(orderRes.statusCode);
+  };
+
+  if (!menuList) return <>...loading</>;
   return (
     <div className="user_app">
       <div className="order_form">
@@ -75,19 +112,19 @@ function Order() {
               <div className="menu_list_wrap">
                 <ul className="menu_list">
                   {cart.map((cartMenu, index) => {
-                    const menuIteminCart = menus.find(
-                      (item) => item.menuId === cartMenu.menuId
+                    const menuIteminCart = menuList.find(
+                      (item) => item.id === +cartMenu.menuId
                     );
-                    console.log(menuIteminCart);
+                    console.log({ cart, menuList, menuIteminCart });
                     const menuTitle = menuIteminCart.title;
                     console.log(menuTitle);
                     const menuPrice = menuIteminCart.price;
                     console.log(menuPrice);
-                    const menuImage = menuIteminCart.img;
+                    const menuImage = menuIteminCart.imgUrl;
                     const menuQuantity = cartMenu.qty;
                     console.log(menuQuantity);
-                    totalRef +=
-                      parseInt(menuPrice.replace(/,/g, ""), 10) * menuQuantity;
+                    totalRef += menuPrice * menuQuantity;
+                    // parseInt(menuPrice.replace(/,/g, ""), 10) * menuQuantity;
                     // console.log(totalRef.current);
                     return (
                       <li key={cartMenu.menuId}>
@@ -103,9 +140,7 @@ function Order() {
                             <strong className="menu_title">{menuTitle}</strong>
                             <CloseIcon
                               className="close_menu"
-                              onClick={() =>
-                                removeFromCart(menuIteminCart.menuId)
-                              }
+                              onClick={() => removeFromCart(menuIteminCart.id)}
                             />
 
                             <div className="figure_area">
@@ -116,7 +151,7 @@ function Order() {
                                   onClick={() =>
                                     decreaseQuantity(
                                       menuQuantity > 1
-                                        ? menuIteminCart.menuId
+                                        ? menuIteminCart.id
                                         : null
                                     )
                                   }
@@ -130,14 +165,16 @@ function Order() {
                                   className="plus_button"
                                   role="button"
                                   onClick={() =>
-                                    increaseQuantity(menuIteminCart.menuId)
+                                    increaseQuantity(menuIteminCart.id)
                                   }
                                 >
                                   +
                                 </a>
                               </div>
                               <div className="menu_price">
-                                <div className="price_text">{menuPrice}원</div>
+                                <div className="price_text">
+                                  {menuPrice.toLocaleString()}원
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -188,12 +225,14 @@ function Order() {
                   이름
                   <em className="extra_required">(필수)</em>
                   <div className="extra_input_box">
-                    <label className="extra_blind">연락처</label>
+                    <label className="extra_blind">이름</label>
                     <input
-                      type="tel"
-                      id="phone"
+                      type="text"
+                      id="name"
                       className="extra_input_text"
                       placeholder="이름을 입력해주세요."
+                      value={orderer}
+                      onChange={handleInputChange}
                     ></input>
                   </div>
                 </span>
@@ -291,7 +330,9 @@ function Order() {
           </div>
 
           {/* 주문하기 버튼 */}
-          <div className="button_pay_disabled">주문하기</div>
+          <div className="button_pay_disabled" onClick={handleOrder}>
+            주문하기
+          </div>
 
           {/* 위로 올라가기 버튼 */}
           <div className="goto_top">

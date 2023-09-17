@@ -567,6 +567,7 @@
   font-weight: bold;
   line-height: 50px;
   text-align: center;
+  cursor: pointer;
 }
 
 .goto_top {

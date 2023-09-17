@@ -1,26 +1,24 @@
-import React from 'react';
-import './App.css'
+import React from "react";
+import "./App.css";
 
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from "react-router-dom";
 
-import Mainpage from './Mainpage'
-import Login from './Login';
-import Menudetail from './Menudetail';
-import Order from './Order';
+import Login from "./Components/Login/Login";
+import Menudetail from "./Components/Menudetail/Menudetail";
+import Order from "./Components/Order/Order";
+import Mainpage from "./Components/Mainpage/Mainpage";
 
 function App() {
-
   return (
-        <Routes>
-          <Route path="/" element={<Mainpage />} />
+    <Routes>
+      <Route path="/" element={<Mainpage />} />
 
-          <Route path="/menu/:menuId" element={<Menudetail />} />
-          <Route path="/order" element={<Order />} />
+      <Route path="/menu/:menuId" element={<Menudetail />} />
+      <Route path="/order" element={<Order />} />
 
-          <Route path="/login" element={<Login />} />
-
-        </Routes>
-  )
+      <Route path="/login" element={<Login />} />
+    </Routes>
+  );
 }
 
 export default App;

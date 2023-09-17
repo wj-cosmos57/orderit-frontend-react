@@ -1,24 +1,39 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 import "./Menudetail.css";
-import menus from "../Menu.json";
+import menus from "../../../Menu.json";
+import { menu as fetchMenu } from "../../apis/menu";
 
-import * as cartModule from "./cartModule";
+import * as cartModule from "../../cartModule";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Menudetail() {
+  const movePage = useNavigate();
   const { menuId } = useParams();
   const [quantity, setQuantity] = useState(0);
-  const movePage = useNavigate();
+  const [menuData, setMenuData] = useState(null);
 
-  // menuId를 사용하여 menus 배열에서 해당 메뉴의 정보를 찾아서 표시
+  useEffect(() => {
+    async function fetchData() {
+      let menuRes = await fetchMenu();
+      console.log(menuRes);
+      setMenuData(menuRes.data.menus.find((m) => m.id === Number(menuId)));
+      console.log(menuId);
+      console.log(menuData);
+    }
+    fetchData();
+  }, []);
+  console.log(menuData);
 
-  const menu = menus.find((m) => m.menuId === menuId);
-  if (!menu) return <div>메뉴를 찾을 수 없습니다.</div>;
+  // json 파일 사용할 때의 코드
+  // menuId를 사용하여 해당 메뉴의 정보를 찾아서 표시
+  // const menu = menus.find((m) => m.id === menuId);
+  // if (!menu) return <div>메뉴를 찾을 수 없습니다.</div>;
+  if (!menuData) return <div>데이터를 불러오는 중...</div>;
 
   const goMainpage = () => {
-    if (quantity > 0) cartModule.addCart(menuId, quantity, "plus");
+    if (quantity > 0) cartModule.addCart(+menuId, quantity, "plus");
     movePage("/" /*, { state: { [menu.title]: quantity } }*/);
   };
 
@@ -33,10 +48,14 @@ function Menudetail() {
         </Link>
       </div>
       <div className="menu-info">
-        <img src={menu.img} alt={menu.title} className="menu-image" />
-        <h1 className="menu-detail-title">{menu.title}</h1>
-        <p className="menu-detail-price">{menu.price}원</p>
-        <p className="menu-detail-text">{menu.detail}</p>
+        <img
+          src={menuData.imgUrl}
+          alt={menuData.title}
+          className="menu-image"
+        />
+        <h1 className="menu-detail-title">{menuData.title}</h1>
+        <p className="menu-detail-price">{menuData.price.toLocaleString()}원</p>
+        <p className="menu-detail-text">{menuData.detail}</p>
         <div className="quantity-controller">
           <button
             className="quantity-decrement"
