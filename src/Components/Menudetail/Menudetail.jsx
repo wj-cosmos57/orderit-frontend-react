@@ -9,7 +9,9 @@ import * as cartModule from "../../cartModule";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Menudetail() {
-  const movePage = useNavigate();
+  const moveMenuDetail = useNavigate();
+  const moveError = useNavigate();
+
   const { menuId } = useParams();
   const [quantity, setQuantity] = useState(0);
   const [menuData, setMenuData] = useState(null);
@@ -17,6 +19,7 @@ function Menudetail() {
   useEffect(() => {
     async function fetchData() {
       let menuRes = await fetchMenu();
+      if (menuRes.statusCode == "SSU4001") moveError("/error");
       console.log(menuRes);
       setMenuData(menuRes.data.menus.find((m) => m.id === Number(menuId)));
       console.log(menuId);
@@ -34,7 +37,7 @@ function Menudetail() {
 
   const goMainpage = () => {
     if (quantity > 0) cartModule.addCart(+menuId, quantity, "plus");
-    movePage("/" /*, { state: { [menu.title]: quantity } }*/);
+    moveMenuDetail("/" /*, { state: { [menu.title]: quantity } }*/);
   };
 
   return (

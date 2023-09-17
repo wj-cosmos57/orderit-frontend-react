@@ -400,12 +400,17 @@
 
 .extra_desc_text1 {
   font-weight: 700;
-  color: #333;
+  padding-left: 15px;
+  margin-top: 6px;
+  font-size: 18px;
+  color: #db0b0b;
 }
 
 .extra_desc_text2 {
   font-weight: 500;
-  color: #8f8f8f;
+  padding-left: 15px;
+  margin-top: 6px;
+  color: #000000;
 }
 
 .section_order_extra2 {
@@ -423,6 +428,7 @@
 }
 
 .extra2_request_area {
+  margin-top: 20px;
   display: block;
   letter-spacing: -0.3px;
 }
@@ -431,7 +437,91 @@
   margin-top: 20px;
 }
 
-.extra2_blind {
+.extra2_request_area_inner {
+  display: flex;
+}
+
+/* 입금자명 */
+.extra2_orderer {
+  font-size: 16px;
+  color: #333;
+  margin-right: 40px;
+  margin-left: 10px;
+  padding: 3px 0; /* 상하 패딩 */
+  font-weight: 600; /* 굵은 폰트 */
+}
+
+/* 금액 */
+.extra2_totalmoney {
+  font-size: 16px;
+  color: #444;
+  margin-left: 10px;
+  padding: 3px 0; /* 상하 패딩 */
+  font-weight: 600; /* 굵은 폰트 */
+}
+
+/* 주의 사항 */
+.extra2_caution {
+  font-size: 16px;
+  color: #d11717;
+  margin-top: 3px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  /* padding: 10px 0; 
+  margin: 10px 0;  */
+}
+
+.bank_section {
+  padding: 10px 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 20px;
+}
+
+.bank_title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.bank_info_area {
+  display: flex;
+  flex-direction: column;
+}
+
+.bank_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bank_item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.bank_label,
+.bank_content {
+  /* flex: 1; */
+  font-size: 16px;
+}
+
+.bank_label {
+  color: #888;
+  margin-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.bank_content {
+  color: #444;
+  margin-right: 10px;
+  padding-left: 10px;
+  text-align: left;
+}
+
+/* .extra2_blind {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -460,7 +550,7 @@
   font-family: -apple-system, BlinkMacSystemFont, helvetica, Apple SD Gothic Neo,
     sans-serif;
   line-height: 24px;
-}
+} */
 
 .developer_section {
   margin: 12px auto 0;

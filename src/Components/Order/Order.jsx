@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { menu } from "../../apis/menu";
 import { orderInfo } from "../../apis/orderInfo";
 
@@ -19,10 +19,13 @@ function Order() {
   const [menuList, setMenuList] = useState(null);
   const [orderer, setOrderer] = useState("");
 
+  const moveError = useNavigate();
+
   //메뉴 api 연동
   useEffect(() => {
     async function fetchData() {
       let menuRes = await menu();
+      if (menuRes.statusCode == "SSU4001") moveError("/error");
       setMenuList(menuRes.data.menus);
     }
     fetchData();
@@ -71,11 +74,10 @@ function Order() {
   const handleInputChange = (e) => {
     setOrderer(e.target.value);
   };
-
   const handleOrder = async () => {
     const name = orderer;
 
-    if (!name) {
+    if (name == "") {
       alert("이름을 입력해주세요!");
       return;
     }
@@ -83,10 +85,23 @@ function Order() {
       menuId: item.menuId,
       qty: item.qty,
     }));
+    console.log(menus);
+    console.log(name);
 
-    let orderRes = orderInfo(menus, name);
-
-    console.log(orderRes.statusCode);
+    let orderRes = await orderInfo(menus, name);
+    console.log(orderRes);
+    if (orderRes.statusCode == "SSU2030") {
+      alert("Order success");
+    } else if (orderRes.statusCode == "SSU4030") {
+      alert("Menu not found");
+    } else if (orderRes.statusCode == "SSU4031") {
+      alert("Bank deposit not found");
+    } else if (orderRes.statusCode == "SSU4001") {
+      //accessTocken 없음
+      moveError("/error");
+    } else {
+      alert("알 수 없는 오류입니다. 직원에게 문의해주세요.");
+    }
   };
 
   if (!menuList) return <>...loading</>;
@@ -216,14 +231,14 @@ function Order() {
 
           {/* 주문자 정보 */}
           <div className="selection_order_extra">
-            <strong className="extra_order_title">주문자 정보</strong>
+            <strong className="extra_order_title">결제자 정보</strong>
 
             <div className="extra_request_area">
               {/* 이름 */}
               <div>
                 <span className="extra_order_sub_title">
-                  이름
-                  <em className="extra_required">(필수)</em>
+                  입금자명
+                  <div className="extra_required">(필수)</div>
                   <div className="extra_input_box">
                     <label className="extra_blind">이름</label>
                     <input
@@ -236,34 +251,16 @@ function Order() {
                     ></input>
                   </div>
                 </span>
-              </div>
-
-              {/* 연락처 */}
-              <div>
-                <span className="extra_order_sub_title">
-                  연락처
-                  <em className="extra_required">(필수)</em>
-                </span>
-
-                <div className="extra_input_box">
-                  <label className="extra_blind">연락처</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    className="extra_input_text"
-                    placeholder="연락처를 입력해주세요."
-                  ></input>
-
-                  <div className="extra_gray_info_box">
-                    <ErrorOutlineIcon style={{ width: 20, height: 20 }} />
-                    <div>
-                      <div className="extra_desc_text1">
-                        이름은 송금인의 이름과 일치하게 해주세요!
-                      </div>
-                      <div className="extra_desc_text2">
-                        입력된 이름과 송금인의 이름을 자동 비교하여 결제를
-                        확인합니다. 일치하지 않을 경우 결제가 완료되지 않습니다.
-                      </div>
+                <div className="extra_gray_info_box">
+                  {/* <ErrorOutlineIcon style={{ width: 30, height: 30 }} /> */}
+                  <div>
+                    <div className="extra_desc_text1">
+                      입금자명을 정확히 기입해주세요!
+                    </div>
+                    <div className="extra_desc_text2">
+                      기입하신 이름과 실제 입금자가 일치하는지 자동 비교
+                      시스템을 통해 확인합니다. 일치하지 않을 경우 결제가
+                      완료되지 않습니다.
                     </div>
                   </div>
                 </div>
@@ -271,21 +268,37 @@ function Order() {
             </div>
           </div>
 
-          {/* 요청사항 */}
+          {/* 입금 계좌 정보 */}
           <div className="section_order_extra2">
-            <strong className="extra2_order_title">요청사항</strong>
+            <strong className="extra2_order_title">입금 계좌 정보</strong>
+
             <div className="extra2_request_area">
-              <div className="extra2_input_box">
-                <lable htmlFor="message" className="extra2_blind">
-                  요청사항
-                </lable>
-                <textarea
-                  id="message"
-                  className="extra2_textarea_text"
-                  rows="1"
-                  placeholder="추가 요청사항이 있다면 입력해주세요."
-                  maxLength="150"
-                ></textarea>
+              <div className="extra2_request_area_inner">
+                <div className="extra2_orderer">입금자명 : {orderer}</div>
+                <div className="extra2_totalmoney">
+                  금액 : {totalRef.toLocaleString()} 원
+                </div>
+              </div>
+              <div className="extra2_caution">
+                입금자명과 금액을 다시 한번 확인해 주세요!!
+              </div>
+              <div className="bank_section">
+                <div className="bank_info_area">
+                  <div className="bank_info">
+                    <div className="bank_item">
+                      <span className="bank_label">은행명</span>
+                      <span className="bank_content">우리은행</span>
+                    </div>
+                    <div className="bank_item">
+                      <span className="bank_label">예금주</span>
+                      <span className="bank_content">이유준</span>
+                    </div>
+                    <div className="bank_item">
+                      <span className="bank_label">계좌번호</span>
+                      <span className="bank_content">100235-84-21069</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

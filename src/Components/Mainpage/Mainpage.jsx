@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Mainpage.css";
 // import menus from "../Menu.json";
@@ -11,10 +11,12 @@ import { menu } from "../../apis/menu"; // db의 "/table/menu"에서 db에 있�
 
 function Mainpage() {
   const [menuList, setMenuList] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
       let menuRes = await menu();
+      console.log(menuRes.statusCode);
+      if (menuRes.statusCode == "SSU4001") navigate("/error");
       setMenuList(menuRes.data.menus);
     }
     fetchData();
