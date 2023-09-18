@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  "http://ec2-52-79-114-252.ap-northeast-2.compute.amazonaws.com/";
+const API_BASE_URL = "https://orderit-backend.ssu.today/";
 const makeHeaders = async (authRequired) => {
   if (authRequired) {
     let accessToken = await localStorage.getItem("accessToken");
