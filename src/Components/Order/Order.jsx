@@ -12,6 +12,9 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+import Swal from "sweetalert2";
+import Loading from "../Loading/Loading";
+
 function Order() {
   const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
   const [cart, setCart] = useState(initialCart);
@@ -19,12 +22,14 @@ function Order() {
   const [menuList, setMenuList] = useState(null);
   const [orderer, setOrderer] = useState("");
 
+  const moveMainPage = useNavigate();
   const moveError = useNavigate();
 
   //메뉴 api 연동
   useEffect(() => {
     async function fetchData() {
       let menuRes = await menu();
+      //accessToken 없이 접속하는 경우
       if (menuRes.statusCode == "SSU4001") moveError("/error");
       setMenuList(menuRes.data.menus);
     }
@@ -41,7 +46,11 @@ function Order() {
     if (menuId) {
       cartModule.addCart(menuId, editQuantity, "minus");
     } else {
-      alert("최소주문 개수 입니다");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "최소 주문 개수입니다!",
+      });
       return;
     }
 
@@ -78,7 +87,11 @@ function Order() {
     const name = orderer;
 
     if (name == "") {
-      alert("이름을 입력해주세요!");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "이름을 입력해주세요!",
+      });
       return;
     }
     const menus = cart.map((item) => ({
@@ -91,16 +104,36 @@ function Order() {
     let orderRes = await orderInfo(menus, name);
     console.log(orderRes);
     if (orderRes.statusCode == "SSU2030") {
-      alert("Order success");
+      Swal.fire({
+        icon: "success",
+        title: "주문 성공",
+        text: "주문이 완료되었습니다!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          moveMainPage("/");
+        }
+      });
     } else if (orderRes.statusCode == "SSU4030") {
       alert("Menu not found");
     } else if (orderRes.statusCode == "SSU4031") {
-      alert("Bank deposit not found");
+      Swal.fire({
+        icon: "error",
+        title: "입금 내역 확인 불가",
+        html: "<b>입금을 하신 뒤</b>에 주문하기를 눌러주세요!<br/>\
+        주문 과정에서 문제가 발생하면 고객센터 <br/>\
+        테이블로 문의해주세요.",
+      });
     } else if (orderRes.statusCode == "SSU4001") {
       //accessTocken 없음
       moveError("/error");
+    } else if (orderRes.statusCode === "SSU0000") {
+      Swal.fire("ErrorCode:0000", "Failed to connect to server", "question");
     } else {
-      alert("알 수 없는 오류입니다. 직원에게 문의해주세요.");
+      Swal.fire(
+        "Error",
+        "알 수 없는 오류입니다. 직원에게 문의해주세요.",
+        "question"
+      );
     }
   };
 

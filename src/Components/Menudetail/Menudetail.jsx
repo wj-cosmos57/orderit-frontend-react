@@ -8,6 +8,8 @@ import { menu as fetchMenu } from "../../apis/menu";
 import * as cartModule from "../../cartModule";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+import Swal from "sweetalert2";
+
 function Menudetail() {
   const moveMenuDetail = useNavigate();
   const moveError = useNavigate();
@@ -19,6 +21,7 @@ function Menudetail() {
   useEffect(() => {
     async function fetchData() {
       let menuRes = await fetchMenu();
+      //accessToken 없이 접속하는 경우
       if (menuRes.statusCode == "SSU4001") moveError("/error");
       console.log(menuRes);
       setMenuData(menuRes.data.menus.find((m) => m.id === Number(menuId)));
@@ -64,7 +67,12 @@ function Menudetail() {
             className="quantity-decrement"
             onClick={() => {
               if (quantity > 0) setQuantity((prev) => prev - 1);
-              else alert("음수값을 입력할 수 없습니다.");
+              else
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "음수값을 입력할 수 없습니다!",
+                });
             }}
           >
             -

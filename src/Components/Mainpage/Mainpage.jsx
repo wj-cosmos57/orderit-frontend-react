@@ -16,6 +16,7 @@ function Mainpage() {
     async function fetchData() {
       let menuRes = await menu();
       console.log(menuRes.statusCode);
+      //accessToken 없이 접속하는 경우
       if (menuRes.statusCode == "SSU4001") navigate("/error");
       setMenuList(menuRes.data.menus);
     }
