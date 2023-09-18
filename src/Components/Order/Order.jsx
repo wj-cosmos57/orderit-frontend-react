@@ -21,7 +21,8 @@ function Order() {
 
   const [menuList, setMenuList] = useState(null);
   const [orderer, setOrderer] = useState("");
-  const [buttonDisable, setbuttonDisable] = useState(false);
+  // const [buttonDisable, setbuttonDisable] = useState(false);
+  const [loadingBoolean, setLoadingBoolean] = useState(false);
 
   const moveMainPage = useNavigate();
   const moveError = useNavigate();
@@ -95,7 +96,8 @@ function Order() {
       });
       return;
     }
-    setbuttonDisable(true);
+    // setbuttonDisable(true);
+    setLoadingBoolean(true);
     const menus = cart.map((item) => ({
       menuId: item.menuId,
       qty: item.qty,
@@ -106,7 +108,8 @@ function Order() {
     let orderRes = await orderInfo(menus, name);
     console.log(orderRes);
     if (orderRes.statusCode == "SSU2030") {
-      setbuttonDisable(false);
+      // setbuttonDisable(false);
+      setLoadingBoolean(false);
       Swal.fire({
         icon: "success",
         title: "주문 성공",
@@ -117,8 +120,10 @@ function Order() {
         }
       });
     } else if (orderRes.statusCode == "SSU4030") {
+      setLoadingBoolean(false);
       alert("Menu not found");
     } else if (orderRes.statusCode == "SSU4031") {
+      setLoadingBoolean(false);
       Swal.fire({
         icon: "error",
         title: "입금 내역 확인 불가",
@@ -127,11 +132,14 @@ function Order() {
         테이블로 문의해주세요.",
       });
     } else if (orderRes.statusCode == "SSU4001") {
+      setLoadingBoolean(false);
       //accessTocken 없음
       moveError("/error");
     } else if (orderRes.statusCode === "SSU0000") {
+      setLoadingBoolean(false);
       Swal.fire("ErrorCode:0000", "Failed to connect to server", "question");
     } else {
+      setLoadingBoolean(false);
       Swal.fire(
         "Error",
         "알 수 없는 오류입니다. 직원에게 문의해주세요.",
@@ -143,6 +151,7 @@ function Order() {
   if (!menuList) return <>...loading</>;
   return (
     <div className="user_app">
+      {loadingBoolean && <Loading />}
       <div className="order_form">
         <div className="section_order_header">
           <div className="order_header_inner">
@@ -380,7 +389,7 @@ function Order() {
 
           {/* 주문하기 버튼 */}
           <button
-            disabled={buttonDisable}
+            // disabled={buttonDisable}
             className="button_pay_disabled"
             onClick={handleOrder}
           >
