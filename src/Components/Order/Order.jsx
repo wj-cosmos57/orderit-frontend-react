@@ -21,6 +21,7 @@ function Order() {
 
   const [menuList, setMenuList] = useState(null);
   const [orderer, setOrderer] = useState("");
+  const [buttonDisable, setbuttonDisable] = useState(false);
 
   const moveMainPage = useNavigate();
   const moveError = useNavigate();
@@ -94,6 +95,7 @@ function Order() {
       });
       return;
     }
+    setbuttonDisable(true);
     const menus = cart.map((item) => ({
       menuId: item.menuId,
       qty: item.qty,
@@ -104,6 +106,7 @@ function Order() {
     let orderRes = await orderInfo(menus, name);
     console.log(orderRes);
     if (orderRes.statusCode == "SSU2030") {
+      setbuttonDisable(false);
       Swal.fire({
         icon: "success",
         title: "주문 성공",
@@ -376,9 +379,13 @@ function Order() {
           </div>
 
           {/* 주문하기 버튼 */}
-          <div className="button_pay_disabled" onClick={handleOrder}>
+          <button
+            disabled={buttonDisable}
+            className="button_pay_disabled"
+            onClick={handleOrder}
+          >
             주문하기
-          </div>
+          </button>
 
           {/* 위로 올라가기 버튼 */}
           <div className="goto_top">
