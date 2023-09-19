@@ -17,7 +17,9 @@ class Login extends Component {
       //server connection fail
       alert("서버와의 접속이 끊어졌습니다.");
     } else if (loginRes.statusCode == "SSU2010") {
+      localStorage.clear();
       localStorage.setItem("accessToken", loginRes.data.accessToken);
+      localStorage.setItem("tableNo", tableNo);
       this.props.navigate("/");
     } else {
       //기타 오류

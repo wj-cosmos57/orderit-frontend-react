@@ -9,7 +9,7 @@ import Bottombar from "./Bottombar.jsx";
 
 import { menu } from "../../apis/menu"; // db의 "/table/menu"에서 db에 있는 메뉴 정보 가져오는 api
 
-function Mainpage() {
+function Mainpage({ tableNo }) {
   const [menuList, setMenuList] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -22,7 +22,6 @@ function Mainpage() {
     }
     fetchData();
   }, []);
-  console.log(menuList);
 
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   // const firstMenuItem =
@@ -33,7 +32,6 @@ function Mainpage() {
     cart.length > 0 && menuList
       ? menuList.find((m) => m.id === Number(cart[0].menuId))
       : null;
-  console.log(firstMenuItem);
   const remainingItems = cart.length; // 담긴 메뉴의 종류 수
 
   let totalQuantity = [0, 0]; // [0]: 카트에 담겨진 총메뉴개수 [1]: 카트에 담겨진 총합계

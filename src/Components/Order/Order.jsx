@@ -24,12 +24,14 @@ function Order() {
   // const [buttonDisable, setbuttonDisable] = useState(false);
   const [loadingBoolean, setLoadingBoolean] = useState(false);
 
+  const orderRef = useRef(null);
+  const [orderHeight, setOrderHeight] = useState(0);
+
   const moveMainPage = useNavigate();
   const moveError = useNavigate();
-
   //메뉴 api 연동
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     async function fetchData() {
       let menuRes = await menu();
       //accessToken 없이 접속하는 경우
@@ -38,11 +40,17 @@ function Order() {
     }
     fetchData();
   }, []);
+  useEffect(() => {
+    if (orderRef.current) {
+      console.log("Hi");
+      setOrderHeight(orderRef.current.offsetHeight);
+    }
+  });
 
   const [showDeveloperInfo, setShowDeveloperInfo] = useState(false);
   let totalRef = 0; //useRef(0)로 총합계 를 쓰려고 함. 하지만 useState로 렌더링을 하기 때문에 useRef로 관리할 필요 없음
 
-  //메뉴 추가, 감소, 삭제
+  //메뉴 추가
   const decreaseQuantity = (menuId) => {
     let editQuantity = 1;
     console.log(menuId);
@@ -60,7 +68,7 @@ function Order() {
     const newCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(newCart);
   };
-
+  //메뉴 감소
   const increaseQuantity = (menuId) => {
     let editQuantity = 1;
     cartModule.addCart(menuId, editQuantity, "plus");
@@ -68,7 +76,7 @@ function Order() {
     const newCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(newCart);
   };
-
+  //메뉴 삭제
   const removeFromCart = (menuId) => {
     const updatedCart = cart.filter((item) => item.menuId !== menuId);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -117,6 +125,7 @@ function Order() {
         text: "주문이 완료되었습니다!",
       }).then((result) => {
         if (result.isConfirmed) {
+          localStorage.removeItem("cart");
           moveMainPage("/");
         }
       });
@@ -133,8 +142,9 @@ function Order() {
         테이블로 문의해주세요.",
       });
     } else if (orderRes.statusCode == "SSU4001") {
+      //accessTocken 없음, 잘못됨, 또는 만료
+      localStorage.clear();
       setLoadingBoolean(false);
-      //accessTocken 없음
       moveError("/error");
     } else if (orderRes.statusCode === "SSU0000") {
       setLoadingBoolean(false);
@@ -151,8 +161,9 @@ function Order() {
 
   if (!menuList) return <>...loading</>;
   return (
-    <div className="user_app">
-      {loadingBoolean && <Loading />}
+    <div className="user_app" ref={orderRef}>
+      {console.log(orderHeight)}
+      {loadingBoolean && <Loading overlayHeight={orderHeight} />}
       <div className="order_form">
         <div className="section_order_header">
           <div className="order_header_inner">
