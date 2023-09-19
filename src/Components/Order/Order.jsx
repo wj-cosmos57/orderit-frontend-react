@@ -352,7 +352,7 @@ function Order() {
                     </div>
                     <div className="bank_item">
                       <span className="bank_label">계좌번호</span>
-                      <span className="bank_content">100235-84-21069</span>
+                      <span className="bank_content">1002-358-421069</span>
                     </div>
                   </div>
                 </div>
