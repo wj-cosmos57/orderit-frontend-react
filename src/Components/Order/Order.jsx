@@ -31,7 +31,7 @@ function Order() {
   const moveError = useNavigate();
   //메뉴 api 연동
   useEffect(() => {
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     async function fetchData() {
       let menuRes = await menu();
       //accessToken 없이 접속하는 경우
