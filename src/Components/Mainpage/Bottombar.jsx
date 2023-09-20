@@ -33,7 +33,8 @@ function Bottombar(props) {
               </div>
               <div className="info_price">{totalMoney.toLocaleString()}</div>
             </div>
-            <div className="table_No">{localStorage.getItem("tableNo")}번</div>
+            {/* {localStorage.getItem("tableNo")}번 */}
+            <div className="table_No">111</div>
             <div className="btn_reset">
               <button className="reset_button" onClick={handleReset}>
                 <DeleteForeverIcon style={{ width: 25, height: 25 }} />
