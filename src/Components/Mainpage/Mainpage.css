@@ -20,7 +20,6 @@
 
 .menu-bar {
   flex: 1;
-  overflow-y: auto;
   height: 90%; /* 전체 높이의 70%를 차지하도록 설정 */
   background-color: #ffffff;
   overflow-y: auto; /*메뉴가 많아져서 화면을 넘을 경우 스크롤바가 생기도록 설정*/
