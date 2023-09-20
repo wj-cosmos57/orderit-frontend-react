@@ -15,7 +15,7 @@ function Menudetail() {
   const moveError = useNavigate();
 
   const { menuId } = useParams();
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [menuData, setMenuData] = useState(null);
 
   useEffect(() => {
@@ -66,18 +66,18 @@ function Menudetail() {
           <button
             className="quantity-decrement"
             onClick={() => {
-              if (quantity > 0) setQuantity((prev) => prev - 1);
+              if (quantity > 1) setQuantity((prev) => prev - 1);
               else
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
-                  text: "음수값을 입력할 수 없습니다!",
+                  text: "최소 주문 개수입니다!",
                 });
             }}
           >
             -
           </button>
-          {quantity >= 0 && <div className="quantity-info">{quantity}</div>}
+          {quantity >= 1 && <div className="quantity-info">{quantity}</div>}
           <button
             className="quantity-increment"
             onClick={() => setQuantity((prev) => prev + 1)}
@@ -87,7 +87,7 @@ function Menudetail() {
         </div>
         <div className="order-button-wrapper">
           <button className="order-button" onClick={goMainpage}>
-            주문하기
+            장바구니 담기
           </button>
         </div>
       </div>
