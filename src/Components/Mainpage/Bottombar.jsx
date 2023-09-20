@@ -31,7 +31,7 @@ function Bottombar(props) {
                   ? `${firstMenuItem.title} 외 `
                   : `${firstMenuItem.title} `}
               </div>
-              <div className="info_price">{totalMoney.toLocaleString()}</div>
+              <div className="info_price">{totalMoney.toLocaleString()}원</div>
             </div>
             <div className="table_No">{localStorage.getItem("tableNo")}번</div>
             <div className="btn_reset">
