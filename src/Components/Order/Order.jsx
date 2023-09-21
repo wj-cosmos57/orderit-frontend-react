@@ -100,7 +100,7 @@ function Order() {
     if (name == "") {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
+        title: "주문 실패",
         text: "이름을 입력해주세요!",
       });
       return;
@@ -136,7 +136,7 @@ function Order() {
       setLoadingBoolean(false);
       Swal.fire({
         icon: "error",
-        title: "입금 내역 확인 불가",
+        title: "주문 실패",
         html: "<b>입금을 하신 뒤</b>에 주문하기를 눌러주세요!<br/>\
         주문 과정에서 문제가 발생하면 고객센터 <br/>\
         테이블로 문의해주세요.",
@@ -146,13 +146,20 @@ function Order() {
       localStorage.clear();
       setLoadingBoolean(false);
       moveError("/error");
+    } else if (orderRes.statusCode == "SSU4032") {
+      setLoadingBoolean(false);
+      Swal.fire({
+        icon: "error",
+        title: "주문 실패",
+        text: "첫 주문 시 최소 주문 개수는 2개입니다!",
+      });
     } else if (orderRes.statusCode === "SSU0000") {
       setLoadingBoolean(false);
       Swal.fire("ErrorCode:0000", "Failed to connect to server", "question");
     } else {
       setLoadingBoolean(false);
       Swal.fire(
-        "Error",
+        "주문 실패",
         "알 수 없는 오류입니다. 직원에게 문의해주세요.",
         "question"
       );
