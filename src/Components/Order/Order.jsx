@@ -191,13 +191,6 @@ function Order() {
       localStorage.clear();
       setLoadingBoolean(false);
       moveError("/error");
-    } else if (orderRes.statusCode == "SSU4032") {
-      setLoadingBoolean(false);
-      Swal.fire({
-        icon: "error",
-        title: "주문 실패",
-        text: "첫 주문 시 최소 주문 개수는 2개입니다!",
-      });
     } else if (orderRes.statusCode === "SSU0000") {
       setLoadingBoolean(false);
       Swal.fire("ErrorCode:0000", "Failed to connect to server", "question");
