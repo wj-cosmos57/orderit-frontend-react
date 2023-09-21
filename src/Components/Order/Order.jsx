@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { menu } from "../../apis/menu";
-import { orderInfo } from "../../apis/orderInfo";
+import { isFirstOrder, orderInfo } from "../../apis/orderInfo";
 
 import "./Order.css";
 import menus from "../../../Menu.json";
@@ -23,9 +23,9 @@ function Order() {
   const [orderer, setOrderer] = useState("");
   // const [buttonDisable, setbuttonDisable] = useState(false);
   const [loadingBoolean, setLoadingBoolean] = useState(false);
-
   const orderRef = useRef(null);
   const [orderHeight, setOrderHeight] = useState(0);
+  const [firstOrder, setFirstOrder] = useState(null);
 
   const moveMainPage = useNavigate();
   const moveError = useNavigate();
@@ -37,6 +37,23 @@ function Order() {
       //accessToken 없이 접속하는 경우
       if (menuRes.statusCode == "SSU4001") moveError("/error");
       setMenuList(menuRes.data.menus);
+
+      let qtyCnt = 0;
+      for await(let cartItem of cart){
+        qtyCnt += cartItem.qty;
+      }
+      let isFirstOrderRes = await isFirstOrder();
+      setFirstOrder(isFirstOrderRes.data);
+      if(isFirstOrderRes.data && qtyCnt < 2){
+        Swal.fire({
+          icon: "warning",
+          title: "상품을 더 담아주세요!",
+          text: "첫 주문 시 최소 2개의 상품을 주문하셔야 합니다.",
+        }).then((result) => {
+            moveMainPage("/");
+          
+        });
+      }
     }
     fetchData();
   }, []);
@@ -59,14 +76,29 @@ function Order() {
     } else {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "최소 주문 개수입니다!",
+        title: "안내",
+        text: "수량을 1 미만으로 변경하실 수 없습니다.",
       });
       return;
     }
 
     const newCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(newCart);
+
+    let qtyCnt = 0;
+    for (let cartItem of newCart){
+      qtyCnt += cartItem.qty;
+    }
+    if(firstOrder && qtyCnt < 2){
+      Swal.fire({
+        icon: "warning",
+        title: "상품을 더 담아주세요!",
+        text: "첫 주문 시 최소 2개의 상품을 주문하셔야 합니다.",
+      }).then((result) => {
+          moveMainPage("/");
+        
+      });
+    }
   };
   //메뉴 감소
   const increaseQuantity = (menuId) => {
@@ -83,6 +115,21 @@ function Order() {
 
     const newCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(newCart);
+
+    let qtyCnt = 0;
+    for (let cartItem of newCart){
+      qtyCnt += cartItem.qty;
+    }
+    if(firstOrder && qtyCnt < 2){
+      Swal.fire({
+        icon: "warning",
+        title: "상품을 더 담아주세요!",
+        text: "첫 주문 시 최소 2개의 상품을 주문하셔야 합니다.",
+      }).then((result) => {
+          moveMainPage("/");
+        
+      });
+    }
   };
 
   // 개발자 정보
@@ -100,8 +147,8 @@ function Order() {
     if (name == "") {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "이름을 입력해주세요!",
+        title: "주문 실패",
+        text: "입금자명을 입력해주세요.",
       });
       return;
     }
@@ -136,10 +183,8 @@ function Order() {
       setLoadingBoolean(false);
       Swal.fire({
         icon: "error",
-        title: "입금 내역 확인 불가",
-        html: "<b>입금을 하신 뒤</b>에 주문하기를 눌러주세요!<br/>\
-        주문 과정에서 문제가 발생하면 고객센터 <br/>\
-        테이블로 문의해주세요.",
+        title: "주문 실패",
+        html: "<font style='font-size: 20px;'>입금 내역이 확인되지 않았습니다.<br/>입금을 먼저 진행해주세요.</font>",
       });
     } else if (orderRes.statusCode == "SSU4001") {
       //accessTocken 없음, 잘못됨, 또는 만료
@@ -288,7 +333,7 @@ function Order() {
 
           {/* 주문자 정보 */}
           <div className="selection_order_extra">
-            <strong className="extra_order_title">결제자 정보</strong>
+            <strong className="extra_order_title">결제 정보</strong>
 
             <div className="extra_request_area">
               {/* 이름 */}
@@ -302,25 +347,12 @@ function Order() {
                       type="text"
                       id="name"
                       className="extra_input_text"
-                      placeholder="이름을 입력해주세요."
+                      placeholder="입금자명을 입력해주세요."
                       value={orderer}
                       onChange={handleInputChange}
                     ></input>
                   </div>
                 </span>
-                <div className="extra_gray_info_box">
-                  {/* <ErrorOutlineIcon style={{ width: 30, height: 30 }} /> */}
-                  <div>
-                    <div className="extra_desc_text1">
-                      입금자명을 정확히 기입해주세요!
-                    </div>
-                    <div className="extra_desc_text2">
-                      기입하신 이름과 실제 입금자가 일치하는지 자동 비교
-                      시스템을 통해 확인합니다. 일치하지 않을 경우 결제가
-                      완료되지 않습니다.
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -328,16 +360,27 @@ function Order() {
           {/* 입금 계좌 정보 */}
           <div className="section_order_extra2">
             <strong className="extra2_order_title">입금 계좌 정보</strong>
-
+            <div className="extra_gray_info_box">
+                  {/* <ErrorOutlineIcon style={{ width: 30, height: 30 }} /> */}
+                  <div>
+                    <div className="extra_desc_text1">
+                      입력하신 입금자명과 표시된 정확한 금액을 입금해주세요.
+                    </div>
+                    <div className="extra_desc_text2">
+                      <li>입력하신 입금자명과 금액을 통해 입금 여부를 확인합니다.</li>
+                      <li>분할 입금, 초과 입금 불가능합니다. 표시된 정확한 금액을 입금해주세요.</li>
+                      <li>입금하신 입금자명과 금액이 일치하지 않으면 입금이 확인되지 않습니다.</li>
+                      <li>입금이 확인되지 않으면 고객센터 테이블로 문의해주세요.</li>
+                      <li>은행 점검 시간에는 고객센터 테이블에서 카드결제를 도와드립니다.</li>
+                    </div>
+                  </div>
+                </div>
             <div className="extra2_request_area">
-              <div className="extra2_request_area_inner">
+            <div className="extra2_request_area_inner">
                 <div className="extra2_orderer">입금자명 : {orderer}</div>
                 <div className="extra2_totalmoney">
                   금액 : {totalRef.toLocaleString()} 원
                 </div>
-              </div>
-              <div className="extra2_caution">
-                입금자명과 금액을 다시 한번 확인해 주세요!!
               </div>
               <div className="bank_section">
                 <div className="bank_info_area">
@@ -357,21 +400,23 @@ function Order() {
                   </div>
                 </div>
               </div>
+              <br/>
+              <div className="extra_desc_text1">
+                아직 주문이 완료되지 않았습니다!<br/>입금 후 이 화면으로 돌아와 주문하기 버튼을 눌러주세요.
+              </div>
             </div>
           </div>
 
           {/* 개발자 정보 */}
-          <div className="developer_section">
+          <div className="developer_section" onClick={toggleDeveloperInfo}>
             <a className="developer_card_header">
               <h3 className="developers_title">개발자 정보</h3>
               {showDeveloperInfo ? (
                 <KeyboardArrowUpIcon
-                  onClick={toggleDeveloperInfo}
                   className="developer_open_button"
                 />
               ) : (
                 <KeyboardArrowDownIcon
-                  onClick={toggleDeveloperInfo}
                   className="developer_open_button"
                 />
               )}
@@ -399,6 +444,7 @@ function Order() {
             )}
           </div>
 
+          <br/>
           {/* 주문하기 버튼 */}
           <button
             // disabled={buttonDisable}

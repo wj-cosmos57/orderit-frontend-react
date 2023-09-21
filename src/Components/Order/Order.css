@@ -291,15 +291,17 @@
 }
 
 .total_price_row {
-  display: block;
+  /* display: block; */
   position: relative;
   line-height: 22px;
+  display: flex;
 }
 
 .total_title {
   display: inline-block;
   vertical-align: top;
   color: #242424;
+  flex: 1;
   font-size: 20px;
   font-weight: bold;
 }
@@ -310,7 +312,7 @@
   font-size: 15px;
   font-weight: 600;
   color: #333;
-  text-align: right;
+  align-self: flex-end;
 }
 
 .total_text {
@@ -437,14 +439,15 @@
 
 .extra2_request_area_inner {
   display: flex;
+  padding: 0px 10px 10px 10px;
 }
 
 /* 입금자명 */
 .extra2_orderer {
   font-size: 16px;
   color: #333;
-  margin-right: 40px;
-  margin-left: 10px;
+  /* margin-right: 40px; */
+  flex: 1;
   padding: 3px 0; /* 상하 패딩 */
   font-weight: 600; /* 굵은 폰트 */
 }
@@ -474,7 +477,7 @@
   padding: 10px 0;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .bank_title {

@@ -46,6 +46,7 @@ function Mainpage({ tableNo }) {
           {/* <div className='logo-title'>2023 IT대학 대동제 주점</div> */}
         </div>
       </div>
+      <div className="table-bar"><b>테이블 번호: {localStorage.getItem("tableNo")}번</b></div>
       <div className="menu-bar">
         {menuList &&
           menuList.map((menu, index) => {

@@ -11,4 +11,12 @@ const orderInfo = async (menus, name) => {
   );
 };
 
-export { orderInfo };
+const isFirstOrder = async () => {
+  return await post(
+    "table/isFirstOrder",
+    {},
+    true
+  )
+}
+
+export { orderInfo, isFirstOrder };

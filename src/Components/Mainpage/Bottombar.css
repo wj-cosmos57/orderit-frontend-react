@@ -19,7 +19,7 @@
 
 .order_btn_area {
   position: relative;
-  max-width: 400px;
+  max-width: 100%;
   margin: 0 auto;
   background-color: #fff;
   border-top: 1px solid;

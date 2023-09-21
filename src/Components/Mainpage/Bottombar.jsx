@@ -15,7 +15,7 @@ function Bottombar(props) {
     window.location.reload();
   };
 
-  const goOrder = () => {
+  const goOrder = async () => {
     movePage("/order");
   };
 
@@ -33,7 +33,7 @@ function Bottombar(props) {
               </div>
               <div className="info_price">{totalMoney.toLocaleString()}원</div>
             </div>
-            <div className="table_No">{localStorage.getItem("tableNo")}번</div>
+            {/* <div className="table_No">{localStorage.getItem("tableNo")}번</div> */}
             <div className="btn_reset">
               <button className="reset_button" onClick={handleReset}>
                 <DeleteForeverIcon style={{ width: 25, height: 25 }} />
