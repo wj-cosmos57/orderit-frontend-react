@@ -184,7 +184,7 @@ function Order() {
       Swal.fire({
         icon: "error",
         title: "주문 실패",
-        html: "<font style='font-size: 20px;'>입금 내역이 확인되지 않았습니다.<br/>입금을 먼저 진행해주세요.</font>",
+        html: "<font style='font-size: 20px;'>입금 내역이 확인되지 않았습니다.<br/>입금 내역 반영까지 최대 1분이 소요될 수 있습니다.</font>",
       });
     } else if (orderRes.statusCode == "SSU4001") {
       //accessTocken 없음, 잘못됨, 또는 만료
