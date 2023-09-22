@@ -1,3 +1,9 @@
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+
 .user_app {
   display: block;
   overflow: hidden;
@@ -323,7 +329,7 @@
 }
 
 .selection_order_extra {
-  padding: 0 18px 40px;
+  padding: 0 18px 28px;
   background-color: #fff;
 }
 
@@ -343,6 +349,7 @@
   padding-top: 30px;
   font-weight: 700;
   line-height: 22px;
+  width: 100%;
   letter-spacing: -0.3px;
   color: #424242;
 }
@@ -377,7 +384,7 @@
   padding: 0 13px;
   border: 1px solid;
   border-radius: 5px;
-  border-color: #e2e5e8;
+  border-color: red;
   background-color: #fff;
   color: #242424;
 
@@ -404,6 +411,15 @@
   margin-top: 6px;
   font-size: 18px;
   color: #db0b0b;
+}
+
+.extra_desc_text1_blink {
+  font-weight: 700;
+  padding-left: 15px;
+  margin-top: 6px;
+  font-size: 18px;
+  color: #db0b0b;
+  animation: blink-effect 1s step-end infinite;
 }
 
 .extra_desc_text2 {

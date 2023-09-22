@@ -142,12 +142,12 @@ function Order() {
     setOrderer(e.target.value);
   };
   const handleOrder = async () => {
-    const name = orderer;
+    const name = orderer.trim();
 
     if (name == "") {
       Swal.fire({
         icon: "error",
-        title: "주문 실패",
+        title: "주문 실패 (Fail)",
         text: "입금자명을 입력해주세요.",
       });
       return;
@@ -168,7 +168,7 @@ function Order() {
       setLoadingBoolean(false);
       Swal.fire({
         icon: "success",
-        title: "주문 성공",
+        title: "주문 성공 (Success)",
         text: "주문이 완료되었습니다!",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -183,8 +183,8 @@ function Order() {
       setLoadingBoolean(false);
       Swal.fire({
         icon: "error",
-        title: "주문 실패",
-        html: "<font style='font-size: 20px;'>입금 내역이 확인되지 않았습니다.<br/>입금 내역 반영까지 최대 1분이 소요될 수 있습니다.</font>",
+        title: "주문 실패 (Fail)",
+        html: "<font style='font-size: 20px;'>입금 내역이 확인되지 않았습니다.<br/>입금 내역 반영까지 최대 1분이 소요될 수 있습니다.<br/><br/>1분이 지나도 입금내역이 확인되지 않으면,<br/>중앙 부스로 문의해주세요.</font>",
       });
     } else if (orderRes.statusCode == "SSU4001") {
       //accessTocken 없음, 잘못됨, 또는 만료
@@ -340,7 +340,7 @@ function Order() {
               <div>
                 <span className="extra_order_sub_title">
                   입금자명
-                  <div className="extra_required">(필수)</div>
+                  <div className="extra_required">(필수, Required)</div>
                   <div className="extra_input_box">
                     <label className="extra_blind">이름</label>
                     <input
@@ -348,12 +348,25 @@ function Order() {
                       id="name"
                       className="extra_input_text"
                       placeholder="입금자명을 입력해주세요."
+                      maxLength={7}
                       value={orderer}
                       onChange={handleInputChange}
                     ></input>
                   </div>
+                  <br/>
+                  <div className="extra_desc_text1" style={{marginBottom: 10, paddingLeft: 4}}>정확한 입금자명을 입력해주셔야 입금 확인이 가능합니다.
+                    </div>
+                    <div className="extra_desc_text1" style={{marginBottom: 0, fontSize: 15, lineHeight: 1, paddingLeft: 4}}>
+                      외국인의 경우 (In case of foreigners):<br/>
+                      1. Choose an alias(max 7 letters) for your name and enter your alias in the [입금자명] field.<br/>
+                      ex) Hong Youjun Gildong {"->"} Hong<br/>
+                      2. When transfering money, set the "Memo for receiver" as your EXACT alias you chose above. (case sensetive)<br/>
+                      3. After transfering money, open this page again and press [주문하기] at the bottom of this page.
+                    </div>
                 </span>
+                
               </div>
+              
             </div>
           </div>
 
@@ -370,8 +383,8 @@ function Order() {
                       <li>입력하신 입금자명과 금액을 통해 입금 여부를 확인합니다.</li>
                       <li>분할 입금, 초과 입금 불가능합니다. 표시된 정확한 금액을 입금해주세요.</li>
                       <li>입금하신 입금자명과 금액이 일치하지 않으면 입금이 확인되지 않습니다.</li>
-                      <li>입금이 확인되지 않으면 고객센터 테이블로 문의해주세요.</li>
-                      <li>은행 점검 시간에는 고객센터 테이블에서 카드결제를 도와드립니다.</li>
+                      <li>입금이 확인되지 않으면 중앙 부스로 문의해주세요.</li>
+                      <li>은행 점검 시간에는 중앙 부스에서 카드결제를 도와드립니다.</li>
                     </div>
                   </div>
                 </div>
@@ -401,8 +414,8 @@ function Order() {
                 </div>
               </div>
               <br/>
-              <div className="extra_desc_text1">
-                아직 주문이 완료되지 않았습니다!<br/>입금 후 이 화면으로 돌아와 주문하기 버튼을 눌러주세요.
+              <div className="extra_desc_text1_blink">
+                아직 주문이 완료되지 않았습니다!<br/>입금 후 이 화면으로 돌아와 하단의 [주문하기] 버튼을 눌러주세요.<br/><br/>Order is not complete yet!<br/>After transfering money, please open this page again and press the [주문하기] button.
               </div>
             </div>
           </div>
