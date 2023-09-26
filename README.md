@@ -3,6 +3,8 @@
 
 <https://orderit.ssu.today/>
 
+<https://orderit.ssu.today/login?tableNo=1>
+
 ## Usage
 1. npm install
 2. npm run dev
