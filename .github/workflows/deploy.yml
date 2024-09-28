@@ -36,4 +36,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            dist s3://orderit.ssu.today
+            dist s3://orderit2024.ssu.today
