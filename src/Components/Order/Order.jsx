@@ -404,11 +404,11 @@ function Order() {
                     </div>
                     <div className="bank_item">
                       <span className="bank_label">예금주</span>
-                      <span className="bank_content">이유준</span>
+                      <span className="bank_content">최원석</span>
                     </div>
                     <div className="bank_item">
                       <span className="bank_label">계좌번호</span>
-                      <span className="bank_content">1002-358-421069</span>
+                      <span className="bank_content">1002-465-219999</span>
                     </div>
                   </div>
                 </div>
