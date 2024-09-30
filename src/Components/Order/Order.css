@@ -666,6 +666,19 @@
   flex: 1;
 }
 
+.sieun {
+  margin-top: 10px;
+
+  display: flex;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  color: #424242;
+
+  -webkit-text-size-adjust: none;
+  text-align: -webkit-match-parent;
+}
+
 .button_pay_disabled {
   display: block;
   width: 92%;

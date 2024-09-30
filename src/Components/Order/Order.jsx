@@ -451,6 +451,12 @@ function Order() {
                         제27대 컴퓨터학부 부학생회장 김종호
                       </div>
                     </li>
+                    <li className="sieun">
+                      <div className="developer_title">Design</div>
+                      <div className="developer_text">
+                        제21대 글로벌 학생회장 이시은
+                      </div>
+                    </li>
                 
 
                   </ul>
