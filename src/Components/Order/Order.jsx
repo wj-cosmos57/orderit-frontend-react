@@ -454,7 +454,7 @@ function Order() {
                     <li className="sieun">
                       <div className="developer_title">Design</div>
                       <div className="developer_text">
-                        제21대 글로벌 학생회장 이시은
+                        제21대 글로벌미디어학부 학생회장 이시은
                       </div>
                     </li>
                 
