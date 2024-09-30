@@ -451,6 +451,13 @@ function Order() {
                         제27대 컴퓨터학부 부학생회장 김종호
                       </div>
                     </li>
+                    <li className="it17th">
+                      <div className="developer_title">17대 아운위</div>
+                      <div className="developer_text">
+                        정말 감사합니다 흑흑 ㅠㅠ
+                      </div>
+                    </li>
+
                   </ul>
                 </div>
               </div>
