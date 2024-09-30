@@ -7,31 +7,31 @@
 }
 
 .table-bar {
-  background-color: white;
+  background-color: #EEE7E7;
   padding: 10px;
-  text-align: end;
+  text-align: center;
 }
 
 .top-bar {
   /*height: 10%; 전체 높이의 20%를 차지하도록 설정*/
-  height: 70px;
-  background-color: #f2f2f2;
+  height: 170px;
+  background-color: #EEE7E7;
   display: flex;
 }
 
 .logo {
   width: 100vw;
-  height: 70px;
+  height: 100%;
 }
 
 .menu-bar {
   flex: 1;
   height: 90%; /* 전체 높이의 70%를 차지하도록 설정 */
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   overflow-y: auto; /*메뉴가 많아져서 화면을 넘을 경우 스크롤바가 생기도록 설정*/
   position: relative;
   display: block;
-  background-color: #fff;
+  background-color: #EEE7E7;
 }
 
 /* Link 컴포넌트는 기본적으로 `<a>` 태그로 렌더링되어 웹브라우저의 기본 스타일을
@@ -51,6 +51,8 @@
 }
 
 .menu-item {
+  background-color: #ffffff;
+  border-radius: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;

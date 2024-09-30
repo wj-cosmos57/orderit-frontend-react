@@ -83,7 +83,7 @@ function Mainpage({ tableNo }) {
                   </div>
                   <div className="menu-purchaseButton">
                     <ShoppingCartOutlinedIcon
-                      sx={{ color: "rgb(10, 210, 137)" }}
+                      sx={{ color: "rgb(150, 0, 0)" }}
                     />
                     {quantityInCart > 0 && (
                       <div className="menu-quantity">{quantityInCart}</div>
