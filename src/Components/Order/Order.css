@@ -191,7 +191,7 @@
   border: 1px solid;
   border-radius: 0 3px 3px 0;
   border-color: #e7e7e7;
-  background-color: #00d780;
+  background-color: #E76B6B;
   cursor: pointer;
   vertical-align: top;
 }
@@ -238,7 +238,7 @@
   vertical-align: -2px;
 
   font-size: 20px;
-  color: #03c75a;
+  color: #ac1905;
 }
 
 /* !!!!! */
@@ -359,7 +359,7 @@
   vertical-align: 1px;
   padding-left: 5px;
   font-size: 13px;
-  color: #03c75a;
+  color: #ff7373;
 }
 
 .extra_input_box {
@@ -670,7 +670,7 @@
   height: 50px;
   margin: 0 auto;
   /* margin: 20px 18px 0; */
-  background-color: #00d780;
+  background-color: #E76B6B;
   border-radius: 5px;
   border: none;
   color: #fff;
