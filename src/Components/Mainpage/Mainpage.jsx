@@ -42,7 +42,7 @@ function Mainpage({ tableNo }) {
     <div className="order-app">
       <div className="top-bar">
         <div className="logo-container">
-          <img src="/logo2024.png" className="logo"></img>
+          <img src="/logoit2024.png" className="logo"></img>
           {/* <div className='logo-title'>2023 IT대학 대동제 주점</div> */}
         </div>
       </div>
