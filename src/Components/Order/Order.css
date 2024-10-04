@@ -65,13 +65,14 @@
 
 .order_inner {
   margin: 0 auto;
+  background-color: #EEE7E7;
 }
 
 .wrap_sections {
-  margin-bottom: 18px;
+  margin-bottom: 25px;
   padding: 10px 16px 16px;
   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
-  background: linear-gradient(180deg, #f3fbff 30%, #ffffff 80%);
+  background: linear-gradient(180deg, #00aaff 30%, #fb0000 80%);
   background-image: linear-gradient(180deg, #f3fbff 30%, #fff 80%);
 }
 
@@ -191,7 +192,7 @@
   border: 1px solid;
   border-radius: 0 3px 3px 0;
   border-color: #e7e7e7;
-  background-color: #00d780;
+  background-color: #E76B6B;
   cursor: pointer;
   vertical-align: top;
 }
@@ -238,13 +239,13 @@
   vertical-align: -2px;
 
   font-size: 20px;
-  color: #03c75a;
+  color: #ac1905;
 }
 
 /* !!!!! */
 
 .selection_order_price {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   padding: 30px;
   background-color: #fff;
 }
@@ -330,6 +331,7 @@
 
 .selection_order_extra {
   padding: 0 18px 28px;
+  margin-bottom: 20px ;
   background-color: #fff;
 }
 
@@ -359,7 +361,7 @@
   vertical-align: 1px;
   padding-left: 5px;
   font-size: 13px;
-  color: #03c75a;
+  color: #ff7373;
 }
 
 .extra_input_box {
@@ -386,7 +388,7 @@
   border-radius: 5px;
   border-color: red;
   background-color: #fff;
-  color: #242424;
+  color: FCF4F4;
 
   box-sizing: border-box;
   font-size: 15px;
@@ -397,7 +399,7 @@
   margin-top: 10px;
   padding: 10px 14px;
 
-  background-color: #f4f7f8;
+  background-color: #FCF4F4;
   border-radius: 5px;
   font-size: 14px;
   line-height: 20px;
@@ -664,13 +666,26 @@
   flex: 1;
 }
 
+.sieun {
+  margin-top: 10px;
+
+  display: flex;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  color: #424242;
+
+  -webkit-text-size-adjust: none;
+  text-align: -webkit-match-parent;
+}
+
 .button_pay_disabled {
   display: block;
   width: 92%;
   height: 50px;
   margin: 0 auto;
   /* margin: 20px 18px 0; */
-  background-color: #00d780;
+  background-color: #E76B6B;
   border-radius: 5px;
   border: none;
   color: #fff;

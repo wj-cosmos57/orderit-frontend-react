@@ -404,11 +404,11 @@ function Order() {
                     </div>
                     <div className="bank_item">
                       <span className="bank_label">예금주</span>
-                      <span className="bank_content">이유준</span>
+                      <span className="bank_content">정해찬</span>
                     </div>
                     <div className="bank_item">
                       <span className="bank_label">계좌번호</span>
-                      <span className="bank_content">1002-358-421069</span>
+                      <span className="bank_content">1002-063-970559</span>
                     </div>
                   </div>
                 </div>
@@ -451,6 +451,14 @@ function Order() {
                         제27대 컴퓨터학부 부학생회장 김종호
                       </div>
                     </li>
+                    <li className="sieun">
+                      <div className="developer_title">Design</div>
+                      <div className="developer_text">
+                        제21대 글로벌미디어학부 학생회장 이시은
+                      </div>
+                    </li>
+                
+
                   </ul>
                 </div>
               </div>
